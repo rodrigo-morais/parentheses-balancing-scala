@@ -15,6 +15,19 @@ object Main {
   }
   
   def balance(chars: List[Char]): Boolean = {
-    false
+    def loop (chars: List[Char], balanced: Int): Boolean = {
+      val head = if(chars.isEmpty) "" else chars.head
+      val tail = if(chars.isEmpty) "".toList else chars.tail
+      
+      if(balanced < 0 || chars.isEmpty) balanced == 0
+      else if(head == '(')
+        loop(tail, balanced + 1)
+      else if(head == ')')
+        loop(tail, balanced - 1)
+      else loop(tail, balanced)
+    }
+      
+    loop(chars, 0)
+        
   }
 }
